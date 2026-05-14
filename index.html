@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FBB | Five Borough Brawl League</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #f0b429; --gold-dim: #a87c1a;
+    --red: #e03131;
+    --bg: #0a0a0a; --surface: #141414; --surface2: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --text: #f0f0f0; --muted: #888;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.95);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 56px;
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: var(--gold); text-decoration: none; }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.95rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 30rem 1.5rem 4rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    background-image: url('fbb-logo.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:none;
+    z-index: 0;
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .hero-eyebrow { font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 0.75rem; }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 1; letter-spacing: 3px;
+    background: linear-gradient(135deg, #fff 40%, var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  
+
+  .hero-sub { margin-top: 1rem; font-size: 1.1rem; color: var(--muted); letter-spacing: 1px; }
+  .hero-badges {
+    display: flex; gap: 0.75rem; flex-wrap: wrap;
+    padding: 1rem 0;
+    margin-top: 2rem;
+  }
+  .badge { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 0.4rem 1rem; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+  .badge span { color: var(--text); }
+
+  /* BADGES BAR */
+  .badges-bar {
+    display: flex; gap: 0.75rem; flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  /* VENUE */
+  .venue-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .venue-img {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+  }
+  .venue-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin-bottom: 0.25rem; }
+  .venue-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 1px; line-height: 1.1; }
+  .venue-address { color: var(--muted); font-size: 0.95rem; margin-top: 0.35rem; }
+  .venue-map-link { display: inline-block; margin-top: 0.6rem; font-size: 0.82rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); text-decoration: none; opacity: 0.85; }
+  .venue-map-link:hover { opacity: 1; }
+
+  /* SECTION */
+  section { padding: 3rem 1.5rem; max-width: 860px; margin: 0 auto; }
+  .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem; }
+  .section-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; color: var(--text); }
+  .section-header .line { flex: 1; height: 1px; background: var(--border); }
+  .section-divider { border: none; border-top: 1px solid var(--border); }
+
+  /* SCHEDULE */
+  .schedule-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .schedule-item { display: flex; align-items: center; gap: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem 1.25rem; }
+  .sched-time { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; color: var(--gold); letter-spacing: 1px; min-width: 70px; }
+  .sched-name { font-weight: 600; font-size: 1rem; }
+  .sched-detail { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+  .sched-badge { margin-left: auto; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
+  .sched-badge.pools { background: rgba(240,180,41,0.12); color: var(--gold); border: 1px solid var(--gold-dim); }
+  .sched-badge.bracket { background: rgba(224,49,49,0.12); color: #f03e3e; border: 1px solid #a12020; }
+  .sched-badge.reg { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+
+  /* RULESET */
+  .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .rule-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; }
+  .rule-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 0.35rem; font-weight: 600; }
+  .rule-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; color: var(--text); }
+  .stages-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+  .stage-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 0.35rem 0.9rem; font-size: 0.85rem; font-weight: 600; color: var(--text); }
+  .stage-pill.starter { border-color: var(--gold-dim); color: var(--gold); background: rgba(240,180,41,0.07); }
+
+  /* LINKS */
+  .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; }
+  .link-card { display: flex; align-items: center; gap: 0.75rem; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem 1rem; text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.95rem; transition: border-color 0.2s, background 0.2s; }
+  .link-card:hover { border-color: var(--gold-dim); background: var(--surface2); }
+  .link-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .link-arrow { margin-left: auto; color: var(--muted); font-size: 1rem; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 2rem 1rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); letter-spacing: 1px; }
+  footer span { color: var(--gold); }
+
+  .link-icon img {
+  filter: invert(1);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">FBB</a>
+  <div class="nav-links">
+    <a href="#rules">Rules</a>
+    <a href="#links">Links</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <!--- <p class="hero-eyebrow">Super Smash Bros. Ultimate</p> --->
+  <!--- <h1>Five Borough<br>Brawl League</h1> --->
+  <!--- <p class="hero-sub">i cant think of a witty subtitle</p> --->
+
+</div>
+
+<div class="badges-bar">
+  <div class="badge"> <span>New York City, NY</span></div>
+  <div class="badge"> <span>Date TBD</span></div>
+  <div class="badge"> <span>SSBU</span></div>
+</div>
+
+<hr class="section-divider">
+
+<div class="venue-section">
+  <img class="venue-img" src="gaming-dojo.jpg" alt="Gaming Dojo logo">
+  <div class="venue-info">
+    <div class="venue-label">Venue</div>
+    <div class="venue-name">Gaming Dojo</div>
+    <div class="venue-address"> 36-29 Main St, Flushing, NY 11354</div>
+    <a class="venue-map-link" href="https://maps.google.com/?q=36-29+Main+St+Flushing+NY+11354" target="_blank">View on Google Maps ↗</a>
+  </div>
+</div>
+
+
+
+<hr class="section-divider">
+
+<section id="rules">
+  <div class="section-header">
+    <h2>Format &amp; Rules</h2>
+    <div class="line"></div>
+  </div>
+  <div class="rules-grid">
+    <div class="rule-card">
+      <div class="rule-label">Format</div>
+      <div class="rule-val">Double Elim</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">Stocks</div>
+      <div class="rule-val">3 Stocks</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">Time Limit</div>
+      <div class="rule-val">None</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">Sets (Pools)</div>
+      <div class="rule-val">Best of 3</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">Sets (Top 8)</div>
+      <div class="rule-val">Best of 5</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">Items</div>
+      <div class="rule-val">Off</div>
+    </div>
+  </div>
+  <div style="margin-top: 1.75rem;">
+    <div class="rule-label" style="margin-bottom: 0.6rem;">Stage List</div>
+    <div class="stages-list">
+      <span class="stage-pill starter">Battlefield</span>
+      <span class="stage-pill starter">Small Battlefield</span>
+      <span class="stage-pill starter">Final Destination</span>
+      <span class="stage-pill starter">Town &amp; City</span>
+      <span class="stage-pill starter">Pokémon Stadium 2</span>
+      <span class="stage-pill">Yoshi's Story</span>
+      <span class="stage-pill">Pokemon Stadium</span>
+      <span class="stage-pill">WarioWare, Inc.</span>
+      <span class="stage-pill">Yoshi's Island</span>
+      <span class="stage-pill">Lylat Cruise</span>
+      <span class="stage-pill starter">Pokemon Stadium 2</span>
+      <span class="stage-pill">Castle Siege</span>
+      <span class="stage-pill starter">Smashville</span>
+      <span class="stage-pill">Unova Pokemon League</span>
+      <span class="stage-pill starter">Kalos Pokemon League</span>
+      <span class="stage-pill">Wuhu Island</span>
+      <span class="stage-pill">Wily Castle</span>
+      <span class="stage-pill">Mementos</span>
+      <span class="stage-pill">Yggdrasil's Altar</span>
+      <span class="stage-pill">Spring Stadium</span>
+      <span class="stage-pill">Minecraft World</span>
+      <span class="stage-pill">Northern Cave</span>
+      <span class="stage-pill starter">Hollow Bastion</span>
+    </div>
+    
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section id="links">
+  <div class="section-header">
+    <h2>Links</h2>
+    <div class="line"></div>
+  </div>
+  <div class="links-grid">
+    <a class="link-card" href="#">
+      <div class="link-icon"><img src="tik-tok.png" alt="TikTok" style="width:20px;height:20px;"></div>
+      <span>TikTok</span>
+      <span class="link-arrow">↗</span>
+    </a>
+    <a class="link-card" href="#">
+      <div class="link-icon"><img src="twitch.png" alt="Twitch" style="width:20px;height:20px;"></div>
+      <span>Twitch Stream</span>
+      <span class="link-arrow">↗</span>
+    </a>
+    <a class="link-card" href="#">
+      <div class="link-icon"><img src="instagram.png" alt="Instagram" style="width:20px;height:20px;"></div>
+      <span>Instagram</span>
+      <span class="link-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 <span>Five Borough Brawl League</span> &nbsp;·&nbsp; New York City
+</footer>
+
+</body>
+</html>
